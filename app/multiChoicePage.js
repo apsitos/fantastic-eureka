@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-// import Ding from '../public/assets/ding.mp3';
+import Ding from '../public/assets/ding.mp3';
 import HotDogStand from '../public/assets/hot-dog-cart.png';
-// import TryAgain from '../public/assets/try-again.mp3';
+import TryAgain from '../public/assets/try-again.mp3';
 import MultiAnswer from './components/MultiAnswer';
 import AnswerModal from './components/AnswerModal';
 
@@ -20,8 +20,8 @@ export default function MultiChoicePage({ setChange }) {
   ];
   const question = "What's the best type of payment?";
 
-  // const correctSound = new Audio('../public/assets/ding.mp3');
-  // const incorrectSound = new Audio('../public/assets/try-again.mp3');
+  let correctSound = new Audio(Ding);
+  let incorrectSound = new Audio(TryAgain);
 
   function selectAnswer(answer) {
     setSelected(answer.correct);
@@ -36,9 +36,12 @@ export default function MultiChoicePage({ setChange }) {
   // }
 
   if (!!selected) {
+    correctSound.play();
     new Promise((resolve) => {
       setTimeout(() => resolve(setChange(false)), 1000);
     });
+  } else {
+    incorrectSound.play();
   }
 
   return (
