@@ -23,25 +23,24 @@ export default function MultiChoicePage({ setChange }) {
   let correctSound = new Audio(Ding);
   let incorrectSound = new Audio(TryAgain);
 
+  function playResponse(response) {
+    if (response === true) {
+      correctSound.play();
+    } else {
+      incorrectSound.play();
+    }
+  }
+
   function selectAnswer(answer) {
     setSelected(answer.correct);
     setIsOpen(true);
+    playResponse(answer.correct);
   }
 
-  // if (!!selected) {
-  //   correctSound.play().then(() => setChange(false));
-  //   return;
-  // } else {
-  //   incorrectSound.play();
-  // }
-
   if (!!selected) {
-    correctSound.play();
     new Promise((resolve) => {
       setTimeout(() => resolve(setChange(false)), 1000);
     });
-  } else {
-    incorrectSound.play();
   }
 
   return (
