@@ -14,4 +14,9 @@ module.exports = {
     });
     return config;
   },
+  output: 'export',
+  crossOrigin: 'anonymous',
+  images: {
+    unoptimized: true,
+  },
 };
